@@ -15,7 +15,7 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
-### Contributing
+# Contributing
 1.Fork it
 2.Create your feature branch (git checkout -b my-new-feature)
 3.Commit your changes (git commit -am 'Add some feature')
