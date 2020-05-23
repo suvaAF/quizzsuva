@@ -37,15 +37,54 @@ class _PageQuizzState extends State<PageQuizz> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    double taille = MediaQuery.of(context).size.width * 0.75;
     return new Scaffold(
       appBar: new AppBar(
         title: new CustomText('Le Quizz Suva'),
       ),
       body: new Center(
+        child: new Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            new CustomText("Question numéro ${index + 1}", color: Colors.grey[900],),
+            new CustomText("Score: $score / $index",color: Colors.grey[900],),
+            new Card(
+              elevation: 10.0,
+              child: new Container(
+                height: taille,
+                width: taille,
+                child: new Image.asset(
+                    "quizz assets/${question.imagePath}",
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            new CustomText(question.question, color: Colors.grey[900], factor: 1.3,),
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                boutonBool(true),
+                boutonBool(false)
+              ],
+            )
+          ],
+        ),
 
       ),
     );
+  }
+
+  RaisedButton boutonBool (bool b) {
+    return new RaisedButton(
+        elevation: 10.0,
+        onPressed: (() => dialogue(b)),
+        color: Colors.blue,
+        child: new CustomText((b)? "Vrai": "Faux", factor: 1.25,),
+        );
+  }
+
+  Future<Null> dialogue(bool b) async {
+
   }
 
 }
