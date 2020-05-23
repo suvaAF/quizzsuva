@@ -84,6 +84,39 @@ class _PageQuizzState extends State<PageQuizz> {
   }
 
   Future<Null> dialogue(bool b) async {
+    bool bonneReponse = (b == question.reponse);
+    String vrai = "quizz assets/vrai.jpg";
+    String faux = "quizz assets/faux.jpg";
+    if (bonneReponse) {
+      score++;
+    }
+
+    return showDialog(
+        context: context,
+       barrierDismissible: false,
+       builder: (BuildContext context) {
+          return new SimpleDialog(
+            title: new CustomText((bonneReponse)? "Tu as gagné! BRAVO !": "COUILLON ! Tu es un gros naze !", factor: 1.4, color: (bonneReponse)? Colors.green: Colors.red,),
+            contentPadding: EdgeInsets.all(20.0),
+            children: <Widget>[
+              new Image.asset((bonneReponse)? vrai: faux, fit: BoxFit.cover,),
+              new Container(height: 25.0,),
+              new CustomText(question.explication, factor: 1.25, color: Colors.grey[900],),
+              new Container(height: 25.0,),
+              new RaisedButton(onPressed: (){
+                Navigator.pop(context);
+                questionSuivante();
+              },
+                child: new CustomText("Suivant Vite", factor: 1.25,),
+                color: Colors.blue,
+              ),
+            ],
+          );
+       }
+    );
+  }
+
+  void questionSuivante() {
 
   }
 
