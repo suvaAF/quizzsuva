@@ -116,8 +116,36 @@ class _PageQuizzState extends State<PageQuizz> {
     );
   }
 
-  void questionSuivante() {
+  Future<Null> alerte() async {
+    return showDialog(context: context,
+      barrierDismissible: false,
+      builder: (BuildContext buildContext) {
+        return new AlertDialog(
+          title: new CustomText("Fini pour toi", color: Colors.blue, factor: 1.25,),
+          contentPadding: EdgeInsets.all(10.0),
+          content: new CustomText("Ton score: $score / $index", color: Colors.grey[900],),
+          actions: <Widget>[
+            new FlatButton(
+                onPressed: (() {
+                  Navigator.pop(buildContext);
+                  Navigator.pop(context);
+                }),
+                child: new CustomText("OK", factor: 1.25, color: Colors.blue,))
+          ],
+        );
+      }
+    );
+  }
 
+  void questionSuivante() {
+      if (index < listeQuestions.length - 1) {
+        index++;
+        setState(() {
+          question = listeQuestions[index];
+        });
+      } else {
+        alerte();
+      }
   }
 
 }
